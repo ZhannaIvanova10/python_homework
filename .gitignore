@@ -1,0 +1,15 @@
+# Logs
+logs/
+!logs/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+
+# System
+.DS_Store
