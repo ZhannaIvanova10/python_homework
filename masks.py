@@ -3,26 +3,19 @@
 Содержит функции для обработки и маскирования конфиденциальной информации.
 """
 import logging
-from typing import Any
 from utils import setup_file_handler
 
-# Настройка логера для masks
 masks_logger = logging.getLogger("masks")
 masks_logger.setLevel(logging.DEBUG)
 masks_logger.addHandler(setup_file_handler("masks.log"))
 
 
 def mask_card_number(card_number: str) -> str:
-    """Маскирует номер карты, оставляя первые 6 и последние 4 цифры.
-
-    Args:
-        card_number: Номер карты (16 цифр)
-
-    Returns:
-        Замаскированный номер карты в формате XXXX XX** **** XXXX
-    """
+    """Маскирует номер карты, оставляя первые 6 и последние 4 цифры."""
     try:
-        masks_logger.debug("Начало маскировки номера карты: %s", card_number)
+        masks_logger.debug(
+            "Начало маскировки номера карты: %s",
+            card_number)
         if not card_number.replace(" ", "").isdigit():
             raise ValueError("Номер карты должен содержать только цифры")
 
@@ -31,30 +24,33 @@ def mask_card_number(card_number: str) -> str:
             raise ValueError("Номер карты должен содержать 16 цифр")
 
         masked = f"{cleaned[:4]} {cleaned[4:6]}** **** {cleaned[-4:]}"
-        masks_logger.info("Номер карты успешно замаскирован: %s", masked)
+        masks_logger.info(
+            "Номер карты успешно замаскирован: %s",
+            masked)
         return masked
     except Exception as e:
-        masks_logger.error("Ошибка при маскировке номера карты: %s", str(e))
+        masks_logger.error(
+            "Ошибка при маскировке номера карты: %s",
+            str(e))
         raise
 
 
 def mask_account_number(account_number: str) -> str:
-    """Маскирует номер счета, оставляя последние 4 цифры.
-
-    Args:
-        account_number: Номер счета (20 цифр)
-
-    Returns:
-        Замаскированный номер счета в формате **XXXX
-    """
+    """Маскирует номер счета, оставляя последние 4 цифры."""
     try:
-        masks_logger.debug("Начало маскировки номера счета: %s", account_number)
+        masks_logger.debug(
+            "Начало маскировки номера счета: %s",
+            account_number)
         if not account_number.isdigit() or len(account_number) != 20:
             raise ValueError("Номер счета должен содержать 20 цифр")
 
         masked = f"**{account_number[-4:]}"
-        masks_logger.info("Номер счета успешно замаскирован: %s", masked)
+        masks_logger.info(
+            "Номер счета успешно замаскирован: %s",
+            masked)
         return masked
     except Exception as e:
-        masks_logger.error("Ошибка при маскировке номера счета: %s", str(e))
+        masks_logger.error(
+            "Ошибка при маскировке номера счета: %s",
+            str(e))
         raise

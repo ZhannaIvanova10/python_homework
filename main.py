@@ -6,15 +6,19 @@ def main():
     """Основная функция для демонстрации работы модулей."""
     print("=== Демонстрация работы модулей ===")
 
-    # Демонстрация utils
     print("\n[Модуль utils]")
-    print("Текущая дата и время:", get_current_datetime())
-    print("Форматированный счет:", format_account_number("12345678901234567890"))
+    current_time = get_current_datetime()
+    print("Текущая дата и время:", current_time)
 
-    # Демонстрация masks
+    formatted_account = format_account_number("12345678901234567890")
+    print("Форматированный счет:", formatted_account)
+
     print("\n[Модуль masks]")
-    print("Замаскированная карта:", mask_card_number("1234567890123456"))
-    print("Замаскированный счет:", mask_account_number("12345678901234567890"))
+    masked_card = mask_card_number("1234567890123456")
+    print("Замаскированная карта:", masked_card)
+
+    masked_account = mask_account_number("12345678901234567890")
+    print("Замаскированный счет:", masked_account)
 
 
 if __name__ == "__main__":
