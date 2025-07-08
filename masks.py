@@ -1,30 +1,27 @@
+"""Модуль для работы с масками данных.
+
+Содержит функции для обработки и маскирования конфиденциальной информации.
+"""
 import logging
 from typing import Any
-
+from utils import setup_file_handler
 
 # Создаем логер для модуля masks
 masks_logger = logging.getLogger("masks")
-masks_logger.setLevel(logging.DEBUG)
-
-# Настраиваем обработчик для записи в файл
-file_handler = logging.FileHandler(
-    "logs/masks.log",
-    mode="w",
-    encoding="utf-8"
-)
-file_handler.setLevel(logging.DEBUG)
-
-# Настраиваем форматтер
-file_formatter = logging.Formatter(
-    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-file_handler.setFormatter(file_formatter)
+file_handler = setup_file_handler()
 
 # Добавляем обработчик к логеру
 masks_logger.addHandler(file_handler)
 
-
 def example_masks_function(param: Any) -> Any:
+    """Обрабатывает данные, применяя необходимые маски.
+
+    Args:
+        param: Входные данные для обработки
+
+    Returns:
+        Обработанные данные с масками
+    """
     try:
         masks_logger.debug(
             "Функция example_masks_function вызвана с параметром: %s",
